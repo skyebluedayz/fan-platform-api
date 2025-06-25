@@ -47,6 +47,37 @@ else:
     CORS(app, origins=['http://localhost:3000'])
     print("Development mode: CORS origins = ['http://localhost:3000']")
 
+# ルートエンドポイント
+@app.route('/api/', methods=['GET'])
+def api_root():
+    return jsonify({
+        "message": "Fan Platform API v1.0",
+        "status": "running",
+        "environment": flask_env,
+        "version": "1.0.0",
+        "available_endpoints": [
+            "/api/health",
+            "/api/test",
+            "/api/support/stats", 
+            "/api/support/add",
+            "/api/creator/earnings/<creator_id>",
+            "/api/support/history/<user_id>",
+            "/api/user/points/<user_id>",
+            "/api/user/points/<user_id>/update",
+            "/api/endpoints"
+        ]
+    })
+
+# シンプルなテストエンドポイント
+@app.route('/api/test', methods=['GET'])
+def test():
+    return jsonify({
+        "message": "API test successful!", 
+        "status": "ok",
+        "timestamp": datetime.now().isoformat(),
+        "environment": flask_env
+    })
+
 # ヘルスチェックエンドポイント
 @app.route('/api/health', methods=['GET'])
 def health_check():
@@ -187,6 +218,8 @@ if __name__ == '__main__':
     print(f"Environment: {flask_env}")
     print(f"Debug mode: {flask_env != 'production'}")
     print("Available endpoints:")
+    print("  GET  /api/")
+    print("  GET  /api/test")
     print("  GET  /api/health")
     print("  GET  /api/support/stats")
     print("  POST /api/support/add")
