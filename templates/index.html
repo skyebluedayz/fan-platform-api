@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファイルアップロードアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📁 ファイルアップロードアプリ</h1>
+            <p>ドラッグ&ドロップまたはボタンクリックでファイルをアップロード</p>
+        </header>
+
+        <main>
+            <!-- アップロードエリア -->
+            <div class="upload-section">
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-icon">📤</div>
+                    <h3>ファイルをここにドラッグ&ドロップ</h3>
+                    <p>または</p>
+                    <button class="upload-btn" id="upload-btn">
+                        📁 ファイルを選択
+                    </button>
+                    <input type="file" id="file-input" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.txt" hidden>
+                </div>
+
+                <!-- アップロード制限情報 -->
+                <div class="upload-info">
+                    <p>📋 <strong>対応形式:</strong> JPG, PNG, GIF, PDF, TXT</p>
+                    <p>📏 <strong>最大サイズ:</strong> 10MB per file</p>
+                    <p>📊 <strong>複数選択:</strong> 可能</p>
+                </div>
+            </div>
+
+            <!-- プログレスバー -->
+            <div class="progress-container" id="progress-container" style="display: none;">
+                <div class="progress-label">アップロード進行状況</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar" id="progress"></div>
+                </div>
+                <div class="progress-text" id="status">準備中...</div>
+            </div>
+
+            <!-- ファイルリスト -->
+            <div class="file-list-container">
+                <h3>📋 アップロードファイル</h3>
+                <div class="file-list" id="file-list">
+                    <!-- ここにアップロードされたファイルが表示されます -->
+                </div>
+            </div>
+
+            <!-- アップロード済みファイル一覧 -->
+            <div class="uploaded-files-container">
+                <h3>💾 保存済みファイル</h3>
+                <button class="refresh-btn" id="refresh-btn">🔄 更新</button>
+                <div class="uploaded-files" id="uploaded-files">
+                    <!-- ここに保存済みファイルが表示されます -->
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 ファイルアップロードアプリ</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
